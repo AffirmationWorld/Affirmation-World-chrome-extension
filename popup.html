@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Affirmation World</title>
+  <link rel="icon" href="images/logo.gif" type="image/gif">
+  <style>
+    :root {
+      --background: #000000;
+      --foreground: #ffffff;
+      --accent-color: #9932cc;
+      --link-color: #00ccff;
+      --visited-link: #ff00ff;
+      --glow-color: rgba(153, 50, 204, 0.5);
+    }
+    
+    body {
+      width: 320px;
+      height: 160px;
+      padding: 0;
+      margin: 0;
+      font-family: "Courier New", monospace;
+      color: var(--foreground);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background-color: transparent;
+    }
+    
+    /* Video background */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -10;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .video-background video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: -5;
+    }
+    
+    .header {
+      padding: 12px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--accent-color);
+      background-color: rgba(0, 0, 0, 0.7);
+      position: relative;
+      z-index: 10;
+      backdrop-filter: blur(5px);
+    }
+    
+    .title {
+      font-size: 16px;
+      font-weight: normal;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      color: var(--foreground);
+    }
+    
+    .logo {
+      width: 28px;
+      height: 28px;
+      margin-right: 10px;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      transition: background-color 0.3s ease;
+      position: relative;
+      z-index: 5;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(3px);
+    }
+    
+    .affirmation {
+      font-size: 18px;
+      text-align: center;
+      margin-bottom: 20px;
+      line-height: 1.4;
+      text-shadow: 0 0 5px var(--glow-color);
+      transition: opacity 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-in-out forwards;
+      padding: 0 8px;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .actions {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    
+    .btn {
+      background: rgba(153, 50, 204, 0.2);
+      border: 1px solid var(--accent-color);
+      color: var(--link-color);
+      padding: 8px 16px;
+      margin: 0 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Courier New", monospace;
+    }
+    
+    .btn:hover {
+      background: rgba(153, 50, 204, 0.4);
+      box-shadow: 0 0 10px var(--glow-color);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+    
+    .toggle-container {
+      display: flex;
+      align-items: center;
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+      margin-left: 8px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      transition: .4s;
+      border-radius: 22px;
+      border: 1px solid var(--accent-color);
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 2px;
+      background-color: var(--link-color);
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: rgba(153, 50, 204, 0.3);
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(18px);
+      background-color: var(--link-color);
+    }
+    
+    .highlight-new {
+      animation: pulseHighlight 1.5s ease-in-out;
+    }
+    
+    @keyframes pulseHighlight {
+      0% { background-color: transparent; }
+      30% { background-color: rgba(153, 50, 204, 0.2); }
+      100% { background-color: transparent; }
+    }
+    
+    /* Background effects */
+    .background-stars {
+      display: none;
+    }
+    
+    .glow-effect {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    
+    .glow-1 {
+      top: -50px;
+      left: -50px;
+      background: radial-gradient(circle, rgba(153, 50, 204, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+    }
+    
+    .glow-2 {
+      bottom: -80px;
+      right: -30px;
+      background: radial-gradient(circle, rgba(0, 204, 255, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+    }
+  </style>
+</head>
+<body>
+  <div class="video-background">
+    <video autoplay loop muted playsinline>
+      <source src="images/images/Clouds Night Sky - Art Videos (1080p, h264).mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="video-overlay"></div>
+  
+  <div class="background-stars"></div>
+  <div class="glow-effect glow-1"></div>
+  <div class="glow-effect glow-2"></div>
+  
+  <div class="header">
+    <h1 class="title">
+      <img src="images/logo.gif" alt="Affirmation World" class="logo">
+      Affirmation World
+    </h1>
+    <div class="toggle-container">
+      <label class="switch" title="Toggle affirmations on/off">
+        <input type="checkbox" id="enableToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+  
+  <div class="content">
+    <div class="affirmation" id="currentAffirmation">
+      Loading affirmation...
+    </div>
+    
+    <div class="actions">
+      <button class="btn" id="newAffirmation" title="Get a new affirmation">New</button>
+      <button class="btn" id="optionsButton" title="Open settings">Settings</button>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html> 

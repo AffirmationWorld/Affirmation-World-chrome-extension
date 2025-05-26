@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Affirmation World Options</title>
+  <link rel="icon" href="images/logo.gif" type="image/gif">
+  <style>
+    :root {
+      --background: #000000;
+      --foreground: #ffffff;
+      --accent-color: #9932cc;
+      --link-color: #00ccff;
+      --visited-link: #ff00ff;
+      --glow-color: rgba(153, 50, 204, 0.5);
+    }
+    
+    body {
+      font-family: "Courier New", monospace;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 20px 0;
+      color: var(--foreground);
+      position: relative;
+      overflow-x: hidden;
+      background-color: transparent;
+    }
+    
+    /* Video background */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -10;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    
+    .video-background video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: -5;
+    }
+    
+    /* Background effects */
+    .background-stars {
+      display: none; /* Hide the starry background */
+    }
+    
+    .glow-effect {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+    
+    .glow-1 {
+      top: -100px;
+      left: -100px;
+      background: radial-gradient(circle, rgba(153, 50, 204, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
+    }
+    
+    .glow-2 {
+      bottom: -150px;
+      right: -50px;
+      background: radial-gradient(circle, rgba(0, 204, 255, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
+    }
+    
+    .logo {
+      width: 48px;
+      height: 48px;
+      margin-right: 15px;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    
+    h1 {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-size: 24px;
+      font-weight: normal;
+      color: var(--accent-color);
+    }
+    
+    .wordart-image {
+      max-width: 300px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    
+    .wordart-container {
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+    
+    .settings-card {
+      margin-bottom: 20px;
+      padding: 0;
+      border-radius: 0px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 1px solid var(--accent-color);
+      box-shadow: 0 0 5px var(--glow-color);
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(5px);
+      width: 85%;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .header-section {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      border-bottom: 1px solid var(--accent-color);
+      background-color: rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 10px var(--glow-color);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .settings-section {
+      margin-bottom: 20px;
+      padding: 20px 20px 15px;
+      border-bottom: 1px solid rgba(153, 50, 204, 0.3);
+    }
+    
+    .settings-section:last-child {
+      margin-bottom: 0;
+      padding-bottom: 20px;
+      border-bottom: none;
+    }
+    
+    .section-title {
+      font-weight: normal;
+      margin-bottom: 15px;
+      color: var(--accent-color);
+      font-size: 18px;
+      text-shadow: 0 0 5px var(--glow-color);
+    }
+    
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .toggle-label {
+      margin-right: 10px;
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      transition: .4s;
+      border-radius: 34px;
+      border: 1px solid var(--accent-color);
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 3px;
+      background-color: var(--link-color);
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: rgba(153, 50, 204, 0.3);
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(26px);
+      background-color: var(--link-color);
+    }
+    
+    button {
+      background-color: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--accent-color);
+      color: var(--link-color);
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+      transition: all 0.2s;
+      font-family: "Courier New", monospace;
+    }
+    
+    button:hover {
+      background-color: rgba(153, 50, 204, 0.3);
+      box-shadow: 0 0 10px var(--glow-color);
+      transform: translateY(-2px);
+    }
+    
+    .affirmation-list {
+      margin-top: 20px;
+      border: 1px solid var(--accent-color);
+      border-radius: 0px;
+      padding: 15px;
+      max-height: 300px;
+      overflow-y: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+    }
+    
+    .affirmation-item {
+      padding: 10px;
+      border-bottom: 1px solid rgba(153, 50, 204, 0.3);
+      transition: background-color 0.2s;
+    }
+    
+    .affirmation-item:hover {
+      background-color: rgba(153, 50, 204, 0.1);
+    }
+    
+    .affirmation-item:last-child {
+      border-bottom: none;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: normal;
+      color: var(--foreground);
+    }
+    
+    .form-group input, .form-group select {
+      padding: 10px;
+      border: 1px solid var(--accent-color);
+      border-radius: 4px;
+      width: 100%;
+      max-width: 300px;
+      font-size: 14px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: var(--foreground);
+      font-family: "Courier New", monospace;
+    }
+    
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      box-shadow: 0 0 5px var(--glow-color);
+    }
+    
+    .schedule-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid rgba(153, 50, 204, 0.3);
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 0px;
+      margin-bottom: 5px;
+    }
+    
+    .schedule-item button {
+      padding: 6px 12px;
+      margin-left: 10px;
+      font-size: 12px;
+    }
+    
+    .schedule-list {
+      margin-top: 15px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    
+    .display-options {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(153, 50, 204, 0.3);
+    }
+    
+    .description {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      margin-top: 5px;
+      margin-left: 30px;
+    }
+    
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 0px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: rgba(153, 50, 204, 0.5);
+      border-radius: 0px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="video-background">
+    <video autoplay loop muted playsinline>
+      <source src="images/images/Clouds Night Sky - Art Videos (1080p, h264).mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="video-overlay"></div>
+  
+  <div class="background-stars"></div>
+  <div class="glow-effect glow-1"></div>
+  <div class="glow-effect glow-2"></div>
+  
+  <div class="settings-card">
+    <div class="header-section">
+      <img src="images/logo.gif" alt="Affirmation World" class="logo">
+      <h1>Affirmation World</h1>
+    </div>
+    
+    <div class="settings-section">
+      <div class="section-title"># Schedule Affirmations</div>
+      
+      <div class="form-group">
+        <label for="scheduleType">Schedule Type:</label>
+        <select id="scheduleType">
+          <option value="interval">Interval (minutes)</option>
+          <option value="specificTime">Specific Times</option>
+        </select>
+      </div>
+      
+      <div id="intervalOptions" class="form-group">
+        <label for="intervalMinutes">Interval (minutes):</label>
+        <input type="number" id="intervalMinutes" min="1" max="1440" value="60">
+        <button id="saveIntervalButton">Save Interval</button>
+      </div>
+      
+      <div id="specificTimeOptions" class="form-group" style="display: none;">
+        <label for="specificTime">Add Time:</label>
+        <input type="time" id="specificTime">
+        <button id="addTimeButton">Add Time</button>
+        
+        <div class="schedule-list" id="scheduleList">
+          <!-- Scheduled times will be listed here -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="settings-section">
+      <div class="section-title"># Appearance Settings</div>
+      
+      <div class="form-group">
+        <label for="gradientStart">Gradient Start Color:</label>
+        <input type="color" id="gradientStart" value="#6e8efb">
+        <div class="description">The starting color of the gradient for affirmation popups</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="gradientEnd">Gradient End Color:</label>
+        <input type="color" id="gradientEnd" value="#a777e3">
+        <div class="description">The ending color of the gradient for affirmation popups</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="textColor">Text Color:</label>
+        <select id="textColor">
+          <option value="white">White</option>
+          <option value="black">Black</option>
+        </select>
+        <div class="description">Choose the color of text displayed on the gradient background</div>
+      </div>
+      
+      <button id="saveGradientButton">Save Appearance</button>
+      <div id="gradientPreview" style="margin-top: 15px; height: 50px; border-radius: 0; background: linear-gradient(135deg, #6e8efb, #a777e3);"></div>
+    </div>
+    
+    <div class="settings-section">
+      <div class="section-title"># Test Affirmation</div>
+      <button id="testBrowserButton">Show Test Affirmation</button>
+    </div>
+  </div>
+  
+  <div class="wordart-container">
+    <img src="images/images/wordart.png" alt="WordArt" class="wordart-image">
+  </div>
+  
+  <script src="options.js"></script>
+</body>
+</html> 

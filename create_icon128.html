@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create icon128.png</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid #ccc;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Create icon128.png</h1>
+        <canvas id="canvas" width="128" height="128"></canvas>
+        <button onclick="downloadIcon()">Download icon128.png</button>
+    </div>
+
+    <script>
+        // Get the canvas and context
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Draw a simple icon (blue circle with "A" in the middle)
+        function drawIcon() {
+            // Clear canvas
+            ctx.clearRect(0, 0, 128, 128);
+            
+            // Draw blue circle
+            ctx.fillStyle = '#4a90e2';
+            ctx.beginPath();
+            ctx.arc(64, 64, 50, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Draw "A" text
+            ctx.font = 'bold 70px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('A', 64, 64);
+        }
+        
+        // Download the icon
+        function downloadIcon() {
+            const link = document.createElement('a');
+            link.download = 'icon128.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        // Draw the icon when the page loads
+        window.onload = drawIcon;
+    </script>
+</body>
+</html> 

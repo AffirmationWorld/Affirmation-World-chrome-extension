@@ -1,0 +1,111 @@
+// List of motivational affirmations
+const affirmations = [
+"I am capable of achieving anything I set my mind to.",
+  "I am worthy of success and happiness.",
+  "I embrace challenges as opportunities for growth.",
+  "My potential is limitless.",
+  "I trust my intuition and make wise decisions.",
+  "I am becoming the best version of myself.",
+  "I radiate confidence, self-respect, and inner harmony.",
+  "I am in charge of how I feel, and today I choose happiness.",
+  "I am grateful for everything I have in my life.",
+  "My positive thoughts create positive outcomes.",
+  "I am resilient and can overcome any obstacle.",
+  "I celebrate my achievements, both big and small.",
+  "I attract abundance and prosperity.",
+  "I am surrounded by positive energy.",
+  "I believe in myself and my abilities.",
+  "I am deserving of love and respect.",
+  "I am focused and productive.",
+  "I turn obstacles into stepping stones.",
+  "I am constantly growing and evolving.",
+  "I am enough just as I am.",
+  "My life is filled with endless possibilities.",
+  "I am at peace with my past and excited about my future.",
+  "I am in the process of becoming the best version of myself.",
+  "I have the power to create change in my life.",
+  "I am aligned with my purpose and passion.",
+  "I am grateful for the abundance that exists in my life.",
+  "I release all negativity and embrace positivity.",
+  "I am strong, confident, and capable.",
+  "I am worthy of all the good things that happen in my life.",
+  "I am in control of my thoughts and emotions.",
+  "I am surrounded by love and support.",
+  "I am making a difference in this world.",
+  "I am committed to my personal growth and development.",
+  "I am attracting positive people and experiences into my life.",
+  "I am deserving of my dreams and goals.",
+  "I am proud of myself and all that I have accomplished.",
+  "I am open to receiving everything life has to offer.",
+  "I am whole and complete exactly as I am.",
+  "I am creating the life of my dreams.",
+  "I am filled with creativity and inspiration.",
+  "I am capable of overcoming any challenge that comes my way.",
+  "I am grateful for my body and all that it does for me.",
+  "I am living in alignment with my highest values.",
+  "I am deserving of rest and self-care.",
+  "I am letting go of all that no longer serves me.",
+  "I am trusting the timing of my life.",
+  "I am worthy of love and belonging.",
+  "I am open to receiving guidance from the universe.",
+  "I am creating healthy boundaries in my relationships.",
+  "I am choosing thoughts that empower me.",
+  "I am at peace with who I am.",
+  "I am proud of the person I am becoming.",
+  "I am grateful for this present moment.",
+  "I am releasing the need for perfection.",
+  "I am worthy of my own love and affection.",
+  "I am choosing to see the beauty in today.",
+  "I am deserving of my own compassion and forgiveness.",
+  "I am embracing my authentic self.",
+  "I am allowing abundance to flow freely in my life.",
+  "I am grateful for the lessons that challenges bring.",
+  "I am living with intention and purpose.",
+  "I am worthy of success and prosperity.",
+  "I am becoming more confident and stronger each day.",
+  "I am creating positive changes in my life.",
+  "I am capable of making difficult decisions.",
+  "I am allowing myself to grow at my own pace.",
+  "I am attracting opportunities that align with my goals.",
+  "I am worthy of respect and acceptance.",
+  "I am releasing all doubts.",
+  "I am grateful for the support I receive from others.",
+  "I am creating a life filled with joy and meaning.",
+  "I am choosing to focus on what I can control.",
+  "I am deserving of peace and tranquility.",
+  "I am open to receiving guidance and wisdom.",
+  "I am proud of my resilience and strength.",
+  "I am creating a positive impact on the world.",
+  "I am worthy of celebrating my progress.",
+  "I am embracing all aspects of myself with love.",
+  "I am grateful for the abundance of opportunities before me.",
+  "I am capable of creating the change I wish to see.",
+  "I am deserving of time to rest and recharge.",
+  "I am embracing my unique gifts and talents.",
+  "I am trusting my journey, even when I don't understand it.",
+  "I am worthy of my dreams and aspirations.",
+  "I am creating a life that aligns with my values.",
+  "I am grateful for the beauty that surrounds me.",
+  "I am capable of handling whatever comes my way.",
+  "I am allowing myself to be fully present in this moment.",
+  "I am deserving of all good things that come to me.",
+  "I am releasing comparison and embracing my unique path.",
+  "I forgive myself for my mistakes."
+];
+
+/**
+ * Returns a random affirmation from the list
+ * @returns {string} A random affirmation
+ */
+export function getRandomAffirmation() {
+  const randomIndex = Math.floor(Math.random() * affirmations.length);
+  return affirmations[randomIndex];
+}
+
+/**
+ * Returns the complete list of affirmations
+ * @returns {string[]} The list of affirmations
+ */
+export function getAllAffirmations() {
+  return [...affirmations];
+} 

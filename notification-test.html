@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chrome Notification Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        button {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #3367d6;
+        }
+        #log {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chrome Notification Test</h1>
+    
+    <p>This page tests if Chrome notifications are working properly.</p>
+    
+    <button id="requestPermission">1. Request Notification Permission</button>
+    <button id="checkPermission">2. Check Notification Permission</button>
+    <button id="showNotification">3. Show Test Notification</button>
+    
+    <div id="log"></div>
+    
+    <script>
+        // Log function
+        function log(message) {
+            const logElement = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            logElement.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+        
+        // Request permission
+        document.getElementById('requestPermission').addEventListener('click', function() {
+            log('Requesting notification permission...');
+            
+            Notification.requestPermission().then(function(permission) {
+                log(`Permission: ${permission}`);
+            });
+        });
+        
+        // Check permission
+        document.getElementById('checkPermission').addEventListener('click', function() {
+            log(`Current permission status: ${Notification.permission}`);
+        });
+        
+        // Show notification
+        document.getElementById('showNotification').addEventListener('click', function() {
+            log('Attempting to show notification...');
+            
+            if (Notification.permission === 'granted') {
+                try {
+                    const notification = new Notification('Test Notification', {
+                        body: 'This is a test notification',
+                        icon: 'icon128.png'
+                    });
+                    
+                    notification.onclick = function() {
+                        log('Notification clicked');
+                    };
+                    
+                    log('Notification created successfully');
+                } catch (error) {
+                    log(`Error creating notification: ${error.message}`);
+                }
+            } else {
+                log('Notification permission not granted');
+            }
+        });
+        
+        // Log initial status
+        window.addEventListener('load', function() {
+            log(`Notification API supported: ${'Notification' in window}`);
+            log(`Current permission status: ${Notification.permission}`);
+        });
+    </script>
+</body>
+</html> 
