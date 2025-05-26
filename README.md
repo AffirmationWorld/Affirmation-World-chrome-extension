@@ -4,8 +4,8 @@
 2. Navigate to extensions by clicking the menu button in the top left of your browser (the three lines)
 3. Enable developer mode in the top right.
 4. Click load unpacked on the top left and select the folder.
-https://www.virustotal.com/gui/url/494dd168410237f8f932a5e1fecdff09e053600663ff189100668ef47099bdbc?nocache=1
 Always scan files before installing
+https://www.virustotal.com/gui/url/494dd168410237f8f932a5e1fecdff09e053600663ff189100668ef47099bdbc?nocache=1
 you can copy and paste this repository link into whatever virus scanner you prefer.
 https://www.virustotal.com/
 
