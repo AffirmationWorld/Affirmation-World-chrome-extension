@@ -11,7 +11,11 @@ you can copy and paste this repository link into whatever virus scanner you pref
 
 https://www.virustotal.com/
 
-# Hourly Affirmations Chrome Extension
+# Showcase Video
+
+https://youtu.be/SFVYwBAcCR4
+
+# Scheduled Affirmations Chrome Extension
 
 A Chrome extension that displays motivational affirmations every hour via Chrome notifications.
 
