@@ -10,9 +10,9 @@
     }
   },
   "icons": {
-    "16": "images/images/IAMcoin.png",
-    "48": "images/images/IAMcoin.png",
-    "128": "images/images/IAMcoin.png"
+    "16": "images/images/use forglow.png",
+    "48": "images/images/use forglow.png",
+    "128": "images/images/use forglow.png"
   },
   "background": {
     "service_worker": "background.js"
@@ -49,9 +49,9 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "images/images/IAMcoin.png",
-      "48": "images/images/IAMcoin.png",
-      "128": "images/images/IAMcoin.png"
+      "16": "images/images/use forglow.png",
+      "48": "images/images/use forglow.png",
+      "128": "images/images/use forglow.png"
     }
   },
   "options_page": "options.html",
@@ -61,7 +61,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["images/logo.gif", "images/images/IAMcoin.png", "images/images/Clouds Night Sky - Art Videos (1080p, h264).mp4", "affirmation-popup.html", "inject-affirmation.js"],
+      "resources": ["images/logo.gif", "images/images/use forglow.png", "images/images/Clouds Night Sky - Art Videos (1080p, h264).mp4", "affirmation-popup.html", "inject-affirmation.js"],
       "matches": ["<all_urls>"]
     }
   ]
