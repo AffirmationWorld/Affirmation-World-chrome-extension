@@ -13,7 +13,7 @@ https://www.virustotal.com/
 
 # Showcase Video
 
-https://youtu.be/SFVYwBAcCR4
+https://www.youtube.com/watch?v=2U6b8AaqZY4
 
 # Scheduled Affirmations Chrome Extension
 
